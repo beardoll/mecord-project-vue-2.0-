@@ -98,7 +98,7 @@
     }
 </style>
 <script>
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     data () {
       return {
@@ -114,8 +114,11 @@
             finishedtemp.push(this.$root.userData.tasks[i])
           }
         }
-        var finishedlist = []
-        var endedlist = []
+        var finishedlist = []  // "已完成"的子任务列表
+        var endedlist = []     // "中途放弃"的子任务列表
+        // questionsettitle -- 问卷标题    number -- 子任务编号
+        // submissionid -- submission的id  questionsetid -- 该问卷的id
+        // submitdate -- 问卷提交的日期，格式为'年/月/日'，用以显示
         var temp2 = {}
         var submitdate, day, month, year
         for (i = 0; i < finishedtemp.length; i++) {
@@ -188,7 +191,6 @@
     },
     methods: {
       detail (taskindex) {  // 查看详情
-        var eventHub = new Vue()
         eventHub.$emit('curread', taskindex)
         this.$router.push('/taskdetailfin')
       }

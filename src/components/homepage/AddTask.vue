@@ -219,6 +219,7 @@
         return returndata
       },
       currentuserid: function () {
+        console.log(this.$root.userData.id)
         return this.$root.userData.id
       }
     },
@@ -228,6 +229,7 @@
         var formjson = $('#searchfor').serializeArray()
         var key = formjson[0].value
         var urls = 'https://api.mecord.cn/api/TaskTemplates/search?userId=' + this.currentuserid
+        console.log('I am here!')
         this.$http.post(urls, '"' + key + '"').then((response) => {
           var temp = {}
           console.log(JSON.stringify(response.body))

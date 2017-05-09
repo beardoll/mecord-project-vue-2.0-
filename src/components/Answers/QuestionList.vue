@@ -101,7 +101,7 @@
 <script>
   import Score from './Score'
   import uploadimg from './UploadImg'
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     props: ['questionItem', 'curindex'],
     data () {
@@ -247,7 +247,6 @@
             data.push(formjson[1].value)
             break
         }
-        var eventHub = new Vue()
         eventHub.$emit('thisanswerstate', status)
         eventHub.$emit('thisanswer', data)
       }

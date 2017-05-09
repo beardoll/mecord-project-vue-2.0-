@@ -54,7 +54,7 @@
     }
 </style>
 <script>
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   import questionlist from './QuestionList'
   import headtitle from '../public_component/head'
 
@@ -71,7 +71,6 @@
       headtitle
     },
     created: function () {
-      var eventHub = new Vue()
       eventHub.$on('thisanswer', function (item) {
         // 把当前问题的答案拿到手
         // dispatched from: QuestionList.vue -> dispatchAnswer
@@ -151,7 +150,6 @@
         })
       },
       preview () { // 预览问卷
-        var eventHub = new Vue()
         eventHub.$emit('saveanswer', this.finishedanswer)
         this.$router.push('/preview')
       }

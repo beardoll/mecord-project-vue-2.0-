@@ -98,7 +98,7 @@
   }
 </style>
 <script>
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     props: ['taskitem', 'taskindex', 'progressname'],
     // progressname: 用来标识进度条的id
@@ -112,7 +112,8 @@
         return this.taskitem.title
       },
       creator: function () {
-        return this.taskitem.creator.nickname
+        return 'sb'
+        // return this.taskitem.creator.nickname
       },
       timediff: function () {
         return this.taskitem.unfinishedlist[0].countdown
@@ -144,15 +145,15 @@
     },
     methods: {
       goToNav () { // 去填写问卷
-        var eventBus = new Vue()
-        eventBus.$emit('markcurtask', this.taskitem)
-        this.$router.push('/navigation')
+        eventHub.$emit('markcurtask', this.taskitem)
+        this.$nextTick(function () {
+          this.$router.push('/navigation')
+        })
       },
       showProgress () {
         $('#' + this.progressname + this.taskindex).css('width', (this.taskprogress) / this.allsubtaskamount * 100 + '%')
       },
       readdetail () {
-        var eventHub = new Vue()
         eventHub.$emit('curread', this.taskitem)
         this.$router.push('/taskdetail')
       }

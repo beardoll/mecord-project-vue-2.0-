@@ -61,7 +61,7 @@
     }
 </style>
 <script>
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     data () {
       return {
@@ -69,27 +69,9 @@
         nickname: '' // 创建者的昵称
       }
     },
-    mounted: function () {
-      this.$nextTick(function () {
-        var logowidth = $('#logo').width()
-        var logoheight = $('#logo').height()
-        var ratio = logoheight / logowidth
-        var maxwidth = 160
-        $('#logo').css('width', maxwidth + 'px')
-        $('#logo').css('height', maxwidth * ratio + 'px')
-        this.$http.get('https://api.mecord.cn/api/MecordUsers/' + this.creatorid).then((response) => {
-          this.avatar = response.body.avatar
-          this.nickname = response.body.nickname
-        }, (response) => {
-          console.log('cannot get the avatar!!')
-        })
-      })
-    },
-    created: function () {  // 在此处加载submissions数据
-
-    },
     computed: {
       title: function () {
+        // console.log(JSON.stringify(this.$root.userData))
         return this.$root.curtask.submissions[this.$root.curtask.progress].questionSet.title
       },
       description: function () {
@@ -102,12 +84,31 @@
         return this.$root.curtask.creatorId
       }
     },
+    mounted: function () {
+      this.$nextTick(function () {
+        var logowidth = $('#logo').width()
+        var logoheight = $('#logo').height()
+        var ratio = logoheight / logowidth
+        var maxwidth = 160
+        $('#logo').css('width', maxwidth + 'px')
+        $('#logo').css('height', maxwidth * ratio + 'px')
+        console.log(this.creatorid)
+/*        this.$http.get('https://api.mecord.cn/api/MecordUsers/' + this.creatorid).then((response) => {
+          this.avatar = response.body.avatar
+          this.nickname = response.body.nickname
+        }, (response) => {
+          console.log('cannot get the avatar!!')
+        }) */
+      })
+    },
+    created: function () {  // 在此处加载submissions数据
+
+    },
     methods: {
       goToFill () {  // 点击开始按钮的时候，加载问卷下所有的问题
         var questionseturl = 'https://api.mecord.cn/api/QuestionSets/' + this.questionsetid + '?filter=%7B%22include%22%3A%22questions%22%7D'
         this.$http.get(questionseturl).then((response) => {
           // console.log(JSON.stringify(response.body))
-          var eventHub = new Vue()
           eventHub.$emit('markcurquestionset', response.body)
           this.$router.push('/answer')
         }, (response) => {

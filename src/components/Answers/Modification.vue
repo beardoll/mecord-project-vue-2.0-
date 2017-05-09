@@ -38,7 +38,7 @@
 <script>
   import questionlist from './QuestionList'
   import headtitle from '../public_component/head'
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     data () {
       return {
@@ -51,7 +51,6 @@
       headtitle
     },
     created: function () {
-      var eventHub = new Vue()
       eventHub.$on('thisanswer', function (item) {
         // 把当前问题的答案拿到手
         // dispatched from: QuestionList.vue -> dispatchAnswer
@@ -99,7 +98,6 @@
           if (this.curanswerstate === false && questionItem.nullValidate === false) {
             window.alert('请正确完成此题')
           } else {
-            var eventHub = new Vue()
             eventHub.$emit('editanswer', this.curanswerdata)
             this.$router.push('/preview')
           }

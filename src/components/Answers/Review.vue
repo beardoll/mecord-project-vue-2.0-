@@ -122,7 +122,7 @@
 </style>
 <script>
   import headtitle from '../public_component/head'
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     data () {
 
@@ -228,7 +228,6 @@
     },
     methods: {
       edit (index) { // 修改index对应的题目
-        var eventHub = new Vue()
         eventHub.$emit('seteditindex', index)  // 上传当前修改的问题在问卷中的下标
         console.log(this.$root.currentanswer)
         this.$router.push('/modification')

@@ -90,7 +90,7 @@
 
 <script>
   import headtitle from '../public_component/head'
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     data () {
       return {
@@ -102,18 +102,23 @@
     },
     computed: {
       tasknote: function () {
+        // 任务标注
         return this.$root.currentread.note
       },
       finishedlist: function () {
+        // 已经完成的子任务列表
         return this.$root.currentread.finishedlist
       },
       tasktitle: function () {
+        // 任务标题
         return this.$root.currentread.title
       },
       endedlist: function () {
+        // 中途终止的子任务列表
         return this.$root.currentread.endedlist
       },
       taskstatus: function () {
+        // 任务的状态，是'finished'还是'ended'
         return this.$root.currentread.status
       }
     },
@@ -129,7 +134,15 @@
           for (var i = 0; i < curanswercontent.length; i++) {
             var temp4 = []
             temp2.push(curanswercontent[i].questionId)
-            switch (curanswercontent[i].type) {   // 不同的题型数据存放的格式不统一
+            switch (curanswercontent[i].type) {
+              // 不同的题型数据存放的格式不统一
+              // 转化为本地所需要的数据格式以便于显示
+              // 具体而言： 1. 'blank'  -- 纯文本，直接取datas来显示即可
+              //            2. 'select' -- 单选题，取选项的下标，即select即可
+              //            3. 'multi_select'  -- 多选题，取所选项的下标并按顺序存为数组，比如选择了B和C，则在本地应保存为[1,2]
+              //            4. 'multi_blank'   -- 多项提空题，取每个空的内容即可
+              //            5. 'symptom_score' -- 程度选择题，将其两个属性levelScore和frequencyScore分别取出，并且依次存入数组即可
+              //            6. 'upload_image'  -- 上传的图片，暂时设置为空，即不在本地显示
               case 'blank':
                 temp4.push(curanswercontent[i].content.datas)
                 break
@@ -162,10 +175,10 @@
           answerarr.answers = temp
           answerarr.questionid = temp2
           console.log(JSON.stringify(curanswercontent))
-          var eventHub = new Vue()
-          eventHub.$emit('saveanswer', answerarr)  // 将答案上传到app.vue
+          eventHub.$emit('saveanswer', answerarr)  // 将答案上传到root组件中
           var questionseturl = 'https://api.mecord.cn/api/QuestionSets/' + curquestionsetid + '?filter=%7B%22include%22%3A%22questions%22%7D'
           this.$http.get(questionseturl).then((response) => {
+            // 把答案对应的问题上传的root组件中
             // console.log(JSON.stringify(response.body))
             eventHub.$emit('markcurquestionset', response.body)
             this.$router.push('/review')

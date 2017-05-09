@@ -104,7 +104,7 @@
 
 <script>
   import headtitle from '../public_component/head'
-  import Vue from 'vue'
+  import { eventHub } from '../../main.js'
   export default{
     data () {
       return {
@@ -116,35 +116,43 @@
     },
     computed: {
       tasknote: function () {
+        // 任务标注
         return this.$root.currentread.note
       },
       unfinishedlist: function () {
+        // 未完成的子任务列表
         return this.$root.currentread.unfinishedlist
       },
       finishedlist: function () {
+        // 已完成的子任务列表
         return this.$root.currentread.finishedlist
       },
       tasktitle: function () {
+        // 任务标题
         return this.$root.currentread.title
       },
-      timediff: function () {    // 问卷的开始时间与当前时间相差的天数
+      timediff: function () {
+        // 问卷的开始时间与当前时间相差的天数
         return this.$root.currentread.unfinishedlist[0].countdown
       },
       taskstate: function () {
+        // 任务的状态，分为过期（0）以及未过期（1）
         if (this.$root.currentread.unfinishedlist[0].countdownstate === 0) { // 过期
           return 0
         } else {
           return 1
         }
       },
-      unfinishedlistcolormark: function () {  // 未完成的子任务的colormark，蓝白相间
+      unfinishedlistcolormark: function () {
+        // 未完成的子任务的colormark，蓝白相间
         var mark = []
         for (var i = 0; i < this.$root.currentread.unfinishedlist.length; i++) {
           mark.push(this.$root.currentread.unfinishedlist[i].colormark)
         }
         return mark
       },
-      finishedlistcolormark: function () {   // 已完成的子任务的colormark，蓝白相间
+      finishedlistcolormark: function () {
+        // 已完成的子任务的colormark，蓝白相间
         var mark = []
         for (var i = 0; i < this.$root.currentread.finishedlist.length; i++) {
           mark.push(this.$root.currentread.finishedlist[i].colormark)
@@ -159,13 +167,21 @@
         console.log(cursubmissionid)
         this.$http.get('https://api.mecord.cn/api/Submissions/' + cursubmissionid + '/answers').then((response) => {
           var curanswercontent = response.body
-          var temp = []
-          var temp2 = []
+          var temp = []    // 存放问卷中各个题目的答案
+          var temp2 = []   // 存放问卷中各个问题的id(questionid)
           var k
           for (var i = 0; i < curanswercontent.length; i++) {
             var temp4 = []
             temp2.push(curanswercontent[i].questionId)
-            switch (curanswercontent[i].type) {   // 不同的题型数据存放的格式不统一
+            switch (curanswercontent[i].type) {
+              // 不同的题型数据存放的格式不统一
+              // 需要转化成我们需要的数据格式，便于显示
+              // 具体而言： 1. 'blank'  -- 纯文本，直接取datas来显示即可
+              //            2. 'select' -- 单选题，取选项的下标，即select即可
+              //            3. 'multi_select'  -- 多选题，取所选项的下标并按顺序存为数组，比如选择了B和C，则在本地应保存为[1,2]
+              //            4. 'multi_blank'   -- 多项提空题，取每个空的内容即可
+              //            5. 'symptom_score' -- 程度选择题，将其两个属性levelScore和frequencyScore分别取出，并且依次存入数组即可
+              //            6. 'upload_image'  -- 上传的图片，暂时设置为空，即不在本地显示
               case 'blank':
                 console.log('haha')
                 temp4.push(curanswercontent[i].content.datas)
@@ -199,10 +215,10 @@
           answerarr.answers = temp
           answerarr.questionid = temp2
           console.log(JSON.stringify(curanswercontent))
-          var eventHub = new Vue()
-          eventHub.$emit('saveanswer', answerarr)  // 将答案上传到app.vue
+          eventHub.$emit('saveanswer', answerarr)  // 将答案上传到root组件中
           var questionseturl = 'https://api.mecord.cn/api/QuestionSets/' + curquestionsetid + '?filter=%7B%22include%22%3A%22questions%22%7D'
           this.$http.get(questionseturl).then((response) => {
+            // 把答案所对应的问题取出来，并且上传到root组件中
             // console.log(JSON.stringify(response.body))
             eventHub.$emit('markcurquestionset', response.body)
             this.$router.push('/review')
@@ -213,7 +229,7 @@
           console.log('cannot get the answers!')
         })
       },
-      end () {    // 暂停当前任务
+      end () {      // 暂停当前任务
         this.$router.push('/withdrawtask')
       },
       settask () {  // 设置任务属性

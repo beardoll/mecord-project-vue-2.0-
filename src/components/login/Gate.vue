@@ -23,10 +23,13 @@
 /*  var qs = require('querystring') */
   export default {
 /*    created: function () {
+      // 这里使用授权码登陆模式，为实际使用的模式
       let params = qs.parse(window.location.href.split('?')[1])
       if (params.code) {
         this.$http.get('https://api.mecord.cn/api/MecordUsers/wxLogin?code=' + params.code)
           .then((response) => {
+            // 返回userId以及Id
+            // wxurl: 注册微信签名时需要用到用户页面的具体url地址
             console.log('登录成功！')
             var wxurl = window.location.href.split('#')[0]
             wxurl = encodeURIComponent(wxurl)
@@ -37,11 +40,12 @@
       }
     } */
     mounted: function () {
+      // 这里仅作调试之用，assesstoken直接从Mecord API获得
       this.$nextTick(function () {
         console.log('begin login!')
         var wxurl = window.location.href.split('#')[0]
         wxurl = encodeURIComponent(wxurl)
-        this.$root.login(wxurl, 'FMc6E3GSniUrT49vt7OJ1pKWJfRRaP3NWFpCwJttKg4Bod1nVkrIITORG0JIPRiD')
+        this.$root.login(wxurl, 'ez5vvico5xy020LMruUEZW7ed2xAW9u7RPap5YFINk3pNFlS6IDFYUf4VFErmjWI')
       })
     }
   }
