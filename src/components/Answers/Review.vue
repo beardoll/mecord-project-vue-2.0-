@@ -165,6 +165,7 @@
           } else {
             data = data1
           }
+          console.log(data)
           switch (tempquest[i].type) {
             case 'blank':
               temp1.push(data1)
@@ -207,6 +208,7 @@
         return this.$root.curquestionset
       },
       questions: function () {
+        console.log('come on!!')
         var temp = this.$root.curquestionset.questions
         for (var i = 0; i < temp.length; i++) {
           temp[i].answers = this.answers[i]  // 把每道题的答案放到对应的问题中

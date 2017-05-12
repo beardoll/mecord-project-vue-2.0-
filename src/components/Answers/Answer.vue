@@ -71,12 +71,12 @@
       headtitle
     },
     created: function () {
-      eventHub.$on('thisanswer', function (item) {
+      eventHub.$on('thisanswer', (item) => {
         // 把当前问题的答案拿到手
         // dispatched from: QuestionList.vue -> dispatchAnswer
         this.curanswerdata = item
       })
-      eventHub.$on('thisanswerstate', function (item) {
+      eventHub.$on('thisanswerstate', (item) => {
         // 把当前问题的答案状态拿到手
         // dispatched from: QuestionList.vue -> dispatchAnswer
         this.curanswerstate = item

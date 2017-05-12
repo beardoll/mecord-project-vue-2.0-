@@ -181,7 +181,7 @@
       answers: function () {  // 将答案转化为纯数字类型数据
         var currentanswer = this.$root.currentanswer
         var tempquest = this.$root.curquestionset.questions // 当前的所有问题，取它们的问题类型来分别操作
-        var temp = []
+        var temp = []         // 存放所有问题对应的answer
         for (var i = 0; i < currentanswer.length; i++) {
           var temp1 = []
           var data1 = currentanswer[i]
@@ -195,11 +195,11 @@
           }
           switch (tempquest[i].type) {
             case 'blank':
-              temp1.push(data1)
+              temp1.push(data[0])
               break
             case 'multi_blank':
               for (var j = 0; j < data.length; j++) {
-                temp1.push(data1[j])
+                temp1.push(data[j])
               }
               break
             case 'select':
