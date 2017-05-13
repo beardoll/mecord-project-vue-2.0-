@@ -5,6 +5,6 @@ using vue 2.0 to implement the project
 -----
     In `main.js`, see the commented syntax:
   ```
-    this.acesstoken.id = data
-    this.accesstoken.userId = 1
+  this.acesstoken.id = data
+  this.accesstoken.userId = 1
   ```
