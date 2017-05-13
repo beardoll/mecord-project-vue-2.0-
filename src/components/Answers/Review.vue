@@ -124,9 +124,6 @@
   import headtitle from '../public_component/head'
   import { eventHub } from '../../main.js'
   export default{
-    data () {
-
-    },
     components: {
       headtitle
     },
@@ -135,6 +132,7 @@
         var currentanswer = this.$root.currentanswer.answers  // 取服务器的答案，不一定与问题的顺序对应
         var questionid = this.$root.currentanswer.questionid  // 服务答案对应问题id
         var tempquest = this.$root.curquestionset.questions // 这次问卷的所有问题，取它们的问题类型来分别操作
+        console.log(JSON.stringify(this.$root.currentanswer))
 
         // 首先将answer和questions一一对应起来
         var realquestionid = []  // 问卷的问题id，按顺序排

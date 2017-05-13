@@ -164,8 +164,8 @@
       review (index) {  // 查看已完成问卷
         var cursubmissionid = this.finishedlist[index].submissionid
         var curquestionsetid = this.finishedlist[index].questionsetid
-        console.log(cursubmissionid)
         this.$http.get('https://api.mecord.cn/api/Submissions/' + cursubmissionid + '/answers').then((response) => {
+          console.log(JSON.stringify(response.body))
           var curanswercontent = response.body
           var temp = []    // 存放问卷中各个题目的答案
           var temp2 = []   // 存放问卷中各个问题的id(questionid)
@@ -183,7 +183,6 @@
               //            5. 'symptom_score' -- 程度选择题，将其两个属性levelScore和frequencyScore分别取出，并且依次存入数组即可
               //            6. 'upload_image'  -- 上传的图片，暂时设置为空，即不在本地显示
               case 'blank':
-                console.log('haha')
                 temp4.push(curanswercontent[i].content.datas)
                 break
               case 'select':
@@ -214,7 +213,6 @@
           var answerarr = {}
           answerarr.answers = temp
           answerarr.questionid = temp2
-          console.log(JSON.stringify(curanswercontent))
           eventHub.$emit('saveanswer', answerarr)  // 将答案上传到root组件中
           var questionseturl = 'https://api.mecord.cn/api/QuestionSets/' + curquestionsetid + '?filter=%7B%22include%22%3A%22questions%22%7D'
           this.$http.get(questionseturl).then((response) => {
