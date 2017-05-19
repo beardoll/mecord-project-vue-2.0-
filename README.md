@@ -5,16 +5,16 @@ using vue 2.0 to implement the project
 
 1. In `src/main.js`, focus on `methods/login`, uncomment the following sentences:
   ```javascript
-    this.accesstoken.id = data    
-    this.accesstoken.userId = 1  
+  this.accesstoken.id = data    
+  this.accesstoken.userId = 1  
   ```
 2. comment the following sentences:
   ```javascript
-    this.accesstoken.userId = data.userId
-    this.accesstoken.id = data.id
+  this.accesstoken.userId = data.userId
+  this.accesstoken.id = data.id
   ```
   
 3. In `components/login/Gate.vue`, focus on script codes, then uncomment all the codes in `mounted` model. Also you should comment the `created` model together with the sentence:
   ```javascript
-    var qs - require('querystring')
+  var qs - require('querystring')
   ```
