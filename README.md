@@ -8,6 +8,7 @@ using vue 2.0 to implement the project
   this.accesstoken.id = data    
   this.accesstoken.userId = 1  
   ```
+  
   then comment the following sentences:
   ```javascript
   this.accesstoken.userId = data.userId
