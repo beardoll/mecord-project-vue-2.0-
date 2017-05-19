@@ -23,3 +23,7 @@ using vue 2.0 to implement the project
   ```javascript
   this.$root.login(wxurl, 'ez5vvico5xy020LMruUEZW7ed2xAW9u7RPap5YFINk3pNFlS6IDFYUf4VFErmjWI')  
   ```
+5. After that, in terminal, use `cd` order to reach the root directory of the project, and run:
+  ```Shell
+  npm run dev
+  ```
