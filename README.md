@@ -17,5 +17,9 @@ using vue 2.0 to implement the project
   
 3. In `components/login/Gate.vue`, focus on script codes, then uncomment all the codes in `mounted` model. Also you should comment the `created` model together with the sentence:
   ```javascript
-  var qs - require('querystring')
+  var qs = require('querystring')
+  ```
+4. When debugging in PC, you should get the accesstoken at the backend and write the info into the `mounted` model of `components/login/Gate.vue`:
+  ```javascript
+  this.$root.login(wxurl, 'ez5vvico5xy020LMruUEZW7ed2xAW9u7RPap5YFINk3pNFlS6IDFYUf4VFErmjWI')  
   ```
