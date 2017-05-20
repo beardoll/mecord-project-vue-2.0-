@@ -27,3 +27,11 @@ using vue 2.0 to implement the project
   ```Shell
   npm run dev
   ```
+6. Remember that if you have not installed the dependencies modules, you should execute:
+  ```Shell
+  npm install
+  ```
+### The data flow of answers
+
+1. common questions ('blank', 'select', 'multi-blank', 'multi-select')
+  we are hahahaha
