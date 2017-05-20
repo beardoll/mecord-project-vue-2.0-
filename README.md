@@ -214,7 +214,34 @@ using vue 2.0 to implement the project
 
    See the function `submit()` in `components/Answers/Preview.vue`
 
-1. Pre-compute the answer to the format designated by the server
+1. Pre-compute the answer to the format designated by the server. If the answers include attachments, then we should do some trival things. First, attachments are bound to 'answer', so we should create an empty answer and store it in 'answers'. Then we should save the 'questionid' and the attachment information of the questions requiring attachments:
+
+   ```javascript
+   attachmentsquestionid.push(temp.questionId)
+   attachmentsurl.push(currentanswer)
+   ```
+   
+   After we submit the 'answers' to the server, we can get 'answers' from the server, then we can upload the attachments to 'answers':
+   ```javascript
+   this.$http.post('https://api.mecord.cn/api/Submissions/' + this.submissions.id + '/answers', submitanswers).then(
+          (response) => {
+            ...
+            // Here we match 'answerid' and 'questionid'
+            // If the questionid of attachment is in the index of 5 in question id
+            // then it's answerid is asnwerid[5]
+            for (var kk = 0; kk < datax.length; kk++) {
+              answerid.push(datax[kk].id)
+              questionid.push(datax[kk].questionId)
+            }
+            ...
+          }
+   ...       
+   // to upload, we should use the wechat api, which will provide us with 'uploadinfo'
+   that.$http.post('https://api.mecord.cn/api/Answers/' + answerid[index] + '/attachments', uploadinfo).then((response) => {...}
+   
+   ```
+
+
 
 
    
