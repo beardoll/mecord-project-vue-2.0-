@@ -41,7 +41,7 @@ using vue 2.0 to implement the project
    ```javascript
    setDefaultValue(questiontype, data)
    // This function is called in 'Answer.vue', which aims to set the answers that users filled right now
-   // It's important in the operation of '上一题'
+   // It's important in the operation of
    ```
 
 3. common questions ('blank', 'select', 'multi_blank', 'multi_select')
