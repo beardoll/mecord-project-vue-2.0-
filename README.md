@@ -79,7 +79,7 @@ using vue 2.0 to implement the project
    //    2. status: the sign to indicate whether the question has been finished
    ```
    
-   To clearly show how it works, let's focus on the parent component `/components/Answers/Answer.vue`. Here we can find two methods, named `goToNextOne(index)` and `backToPastOne(index)`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)` and `dispatchAnswer(questionItem)`. We just introduce `goToNextOne(index)`.
+     To clearly show how it works, let's focus on the parent component `/components/Answers/Answer.vue`. Here we can find two methods, named `goToNextOne(index)` and `backToPastOne(index)`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)` and `dispatchAnswer(questionItem)`. We just introduce `goToNextOne(index)`.
    
    ```javascript
    gotoNextOne(index)
