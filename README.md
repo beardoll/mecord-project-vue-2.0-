@@ -150,7 +150,7 @@ using vue 2.0 to implement the project
    // note: the key words 'this' (originally point to Vue component) has been covered, so we should rename 'this' as 'that'
    // Then we can get the path in 'QuestionList.vue' by using:
    formjson = this.$refs.upimg.imgsrc     // In QuestionList.vue -> dispatchAnswer
-   // To set the default path of image, we can use setDefaultImgSrc(data) in 'QuestionList.vue'
+   // To set the default path of image, we can use setDefaultImgSrc(data) in 'QuestionList.vue'
    this.$refs.upimg.setDefaultImgSrc(data)
    ```
    
