@@ -185,15 +185,19 @@ using vue 2.0 to implement the project
       ```
    
    * To clearly show the data transportation route, I suggest that in the 'reciever', you should show where the data comes from, for example:
-   ```javascript
-   // in main.js
-   eventHub.$on('markcurtask', (item) => {
-      // 当前操作的任务
-      // dispatched from: FirstPanel.vue -> goToNav()
-      this.curtask = item
-      // console.log(JSON.stringify(this.curtask))
-    })
-   ```
+      ```javascript
+      // in main.js
+      eventHub.$on('markcurtask', (item) => {
+        // 当前操作的任务
+        // dispatched from: FirstPanel.vue -> goToNav()
+        this.curtask = item
+        // console.log(JSON.stringify(this.curtask))
+      })
+      ```
 
 ## How to load the data in the server 
+
+1. Save the data in the `root` component
+
+   
    
