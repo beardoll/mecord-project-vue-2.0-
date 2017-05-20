@@ -42,10 +42,17 @@ using vue 2.0 to implement the project
    ```
    The above code was written in function `dispatchAnswer(questionItem)` in `method` module.
    After receving the content, you should transform its format to what we need. This operatoin can be found in the `switch` syntax in 'dispatchAnswer(questionItem)'. 
-| question      | format |
-|---------------|--------|
-| blank         | 0.698  |
-| select        | 0.788  |
-| multi-blank   | 0.657  |
-| multi_select  | 0.000  |
+| Classes       | AP     |
+|-------------|--------|
+| aeroplane   | 0.698 |
+| bicycle     | 0.788 |
+| bird        | 0.657 |
+| boat        | 0.565 |
+| bottle      | 0.478 |
+| bus         | 0.762 |
+| car         | 0.797 |
+| cat         | 0.793 |
+| chair       | 0.479 |
+| cow         | 0.724 |
+| diningtable | 0.648 |
 
