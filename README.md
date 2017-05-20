@@ -1,7 +1,15 @@
 # mecord-project-vue2.0
 using vue 2.0 to implement the project
 
-## How to debug in PC?
+## The structure of the project
+   All the components except the root componet are written in `src/components`.
+   * Answers -- Components about showing the questions, storing the answers and uploading the answers to the server, etc.
+   * homepage -- Components about showing the details of tasks, adding new tasks, setting some status of tasks, etc.
+   * login -- Components about the gate of the project, here is the first page you can see when you enter the project.
+   * mine -- Components about showing the private information, users can modify their information.
+   * public_component -- Components that are used frequently.
+
+## How to debug in PC
 
 1. In `src/main.js`, focus on `methods/login`, uncomment the following sentences:
    ```javascript
@@ -253,7 +261,8 @@ using vue 2.0 to implement the project
    }
    ```
 
-3. In `Preview.vue`, we create a mask to inform the user that his answer is being uploaded. The design of the mask can be found in '<template>':
+3. In `Preview.vue`, we create a mask to inform the user that his answer is being uploaded. The design of the mask can be found in `<template>`:
+
    ```html
     <div class="mask" v-if="showmask === true">
        <div class="maskprompt">
@@ -262,6 +271,8 @@ using vue 2.0 to implement the project
        </div>
     </div>
    ```
+   
+   It will cover the whole page, you can check the css style of the classes.
 
 
 
