@@ -34,4 +34,5 @@ using vue 2.0 to implement the project
 ### The data flow of answers
 
 1. common questions ('blank', 'select', 'multi-blank', 'multi-select')
+
   we are hahahaha
