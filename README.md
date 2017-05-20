@@ -173,5 +173,5 @@ using vue 2.0 to implement the project
    ```
 
 2. Some tips in using `eventHub`
-   *When triggering an `eventHub`, you should make sure that the 'sender' and 'receiver' are all rendered.
+   * When triggering an `eventHub`, you should make sure that the 'sender' and 'receiver' are all rendered.
    
