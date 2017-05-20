@@ -62,6 +62,8 @@ using vue 2.0 to implement the project
       })
     }
     break
+    // First we tranform the data into 'int' format
+    // Then we use the function '.each' in 'jQuery' to traverse all the options, and mark the option with index equal to 'checked index' as 'checked' in '$('input')' module, for other options we just label them as 'unchecked', then you can see 'data' is successfully rendered in '<template>'
    ```
    
    To clearly show how it works, let's focus on the parent component `/components/Answers/Answer.vue`. Here we can find two methods, named `goToNextOne` and `backToPastOne`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)`.
