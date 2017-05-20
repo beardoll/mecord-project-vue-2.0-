@@ -35,7 +35,13 @@ using vue 2.0 to implement the project
    ```Shell
    npm run dev
    ```
-6. Remember that if you have not installed the dependencies modules, you should execute:
+   
+6. If you want to distribute the project to the server, you should execute:
+   ```Shell
+   npm run build
+   ```
+
+7. Remember that if you have not installed the dependencies modules, you should execute:
    ```Shell
    npm install
    ```
