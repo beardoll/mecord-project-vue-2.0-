@@ -173,5 +173,27 @@ using vue 2.0 to implement the project
    ```
 
 2. Some tips in using `eventHub`
-   * When triggering an `eventHub`, you should make sure that the 'sender' and 'receiver' are all rendered.
+   * When triggering an `eventHub`, you should make sure that the 'sender' and 'receiver' are all rendered. A typical condition is, the 'sender' is the child component and the 'receiver' is the parent component. So if the relationship between 'sender' and 'reciever' is not parent-child relationship, I suggest that you store the message in the `root` component. Here our root component is defined in `src/main.js`. Then if you want to use the message in another component, you can just use:
+   ```javascript
+   item = this.$root.item
+   ```
+   Then the problem of cross-transportation is handled.
+   
+   * Remember that the `eventHub` is a global variable, so in any component using the variable, you should import it:
+   ```javasript
+   import { eventHub } from '../../main.js'
+   ```
+   
+   * To clearly show the data transportation route, I suggest that in the 'reciever', you should show where the data comes from, for example:
+   ```javascript
+   // in main.js
+   eventHub.$on('markcurtask', (item) => {
+      // 当前操作的任务
+      // dispatched from: FirstPanel.vue -> goToNav()
+      this.curtask = item
+      // console.log(JSON.stringify(this.curtask))
+    })
+   ```
+
+## How to load the data in the server 
    
