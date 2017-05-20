@@ -240,7 +240,28 @@ using vue 2.0 to implement the project
    that.$http.post('https://api.mecord.cn/api/Answers/' + answerid[index] + '/attachments', uploadinfo).then((response) => {...}
    
    ```
+   
+2. When we upload answers and attachments, we should update some status of the task:
+   ```javascript
+   updatesubmission.status = 'finished'
+   updatesubmission.submitDate = new Date()
+   updatesubmission.submitterId = that.userId
+   that.$http.put('https://api.mecord.cn/api/Submissions/' + that.submissions.id, updatesubmission).then((response) => {
+      ...
+      that.$http.put(updatetaskurl, {'progress': updateprogress, 'status': updatestate})
+      ...
+   }
+   ```
 
+3. In `Preview.vue`, we create a mask to inform the user that his answer is being uploaded. The design of the mask can be found in '<template>':
+   ```html
+    <div class="mask" v-if="showmask === true">
+       <div class="maskprompt">
+          <i class="am-icon-spinner am-icon-md am-icon-spin"></i>
+          <p style="font-size:16px">提交中，请稍后，请勿关闭页面，耐心等待系统提示“提交成功”</p>
+       </div>
+    </div>
+   ```
 
 
 
