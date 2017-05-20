@@ -37,11 +37,36 @@ using vue 2.0 to implement the project
    In `components/Answers/QuestionList.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render one question, which is decided by the conditional render syntax.
 
 2. Two important functions in `method` module
-
+ 
+   First we introduce the function `setDefaultValue(questiontype, data)`
+   
    ```javascript
    setDefaultValue(questiontype, data)
-   // This function is called in 'Answer.vue', which aims to set the answers that users filled right now
-   // It's important in the operation of
+   // This function is called in parent 'Answer.vue', which aims to set the answers that users have filled right now
+   // It's important while we look back to the past questions
+   // It's called after the render of the component, which we will introduce later
+   // It's easy to comprehend the procedure of loading the varible 'data' to our component, for example
+   case 'select':
+    if (data !== '') {  // 多项填空题，当答案不为空时
+      var checkedindex = parseInt(data[0])  // json存的是字符而不是数字
+      $('input').each(function (index, element) {
+        if (index === checkedindex) {
+          $(this).prop('checked', true)
+        } else {
+          $(this).prop('checked', false)
+        }
+      })
+    } else {   // 当答案为空时
+      $('input').each(function (index, element) {
+        $(this).prop('checked', false)
+      })
+    }
+    break
+   ```
+   
+   To clearly show how it works, let's focus on the parent component `/components/Answers/Answer.vue`. Here we can find two methods, named `goToNextOne` and `backToPastOne`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)`.
+   ```javascript
+   
    ```
 
 3. common questions ('blank', 'select', 'multi_blank', 'multi_select')
