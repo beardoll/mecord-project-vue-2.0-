@@ -3,11 +3,11 @@ using vue 2.0 to implement the project
 
 ## The structure of the project
    All the components except the root component are written in `src/components`.
-   * Answers -- Components about showing the questions, storing the answers and uploading the answers to the server, etc.
-   * homepage -- Components about showing the details of tasks, adding new tasks, setting some status of tasks, etc.
-   * login -- Components about the gate of the project, here is the first page you can see when you enter the project.
-   * mine -- Components about showing the private information, users can modify their information.
-   * public_component -- Components that are used frequently.
+   * `Answers` -- Components about showing the questions, storing the answers and uploading the answers to the server, etc.
+   * `homepage` -- Components about showing the details of tasks, adding new tasks, setting some status of tasks, etc.
+   * `login` -- Components about the gate of the project, here is the first page you can see when you enter the project.
+   * `mine` -- Components about showing the private information, users can modify their information.
+   * `public_component` -- Components that are used frequently.
 
 ## How to debug in PC
 
