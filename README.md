@@ -79,7 +79,7 @@ using vue 2.0 to implement the project
    //    2. status: the sign to indicate whether the question has been finished
    ```
    
-     To clearly show how it works, let's focus on the parent component `/components/Answers/Answer.vue`. Here we can find two methods, named `goToNextOne(index)` and `backToPastOne(index)`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)` and `dispatchAnswer(questionItem)`. We just introduce `goToNextOne(index)`.
+   To clearly show how it works, let's focus on the parent component `/components/Answers/Answer.vue`. Here we can find two methods, named `goToNextOne(index)` and `backToPastOne(index)`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)` and `dispatchAnswer(questionItem)`. We just introduce `goToNextOne(index)`.
    
    ```javascript
    gotoNextOne(index)
@@ -95,10 +95,11 @@ using vue 2.0 to implement the project
    // We wait for the rendering using 'nextTick'
    // Then the new 'QuestionList' component has been rendered, and we can transport the data to it (if the new question has been accomplished in the past)
    var curanswerdefaultdata = this.finishedanswer[this.curindex]
-   this.$refs.qlist.setDefaultValue(this.questions[this.curindex].type, curanswerdefaultdata)   
+   this.$refs.qlist.setDefaultValue(this.questions[this.curindex].type, curanswerdefaultdata) 
+   // After that, the past answer will be rendered to the component 'QuestionList'
    ```
 
-3. common questions ('blank', 'select', 'multi_blank', 'multi_select')
+3. The diposal of common questions (`blank`, `select`, `multi_blank`, `multi_select`)
 
    All answers here will be saved in the `<form>` module, we can get the contents by applying:
    ```javascript
@@ -110,10 +111,28 @@ using vue 2.0 to implement the project
    | question style  |  answer format |
    | --------------- | ---------------|
    |      blank      |     ['16']     |
-   |     select      |      [0]       |
+   |     select      |     ['0']      |
    |   multi_blank   |   ['3', '4']   | 
-   |   multi_select  |   [1, 2, 3]    |
+   |   multi_select  | ['1', '2', '3']|
+
+4. The disposal of `symptom_score` question
+
+   We create a seperate model named `Score.vue` in the same directory, which accomplishes the task of: a. render the score bars. b. set the bars to the values indicated by `QuestionList.vue`.
    
-   After transformation, you should dispatch the answer the its parent component `Answer.vue`.
+   In fact, this kind of question is just the 'drop-down list', so we can set the value using `setSymptomScoreData(data)`:
+   ```javascript
+   setSymptomScoreData(data)
+   // In this function we will change the style of the bar by changing the class
+   // And the value will be set using:
+   var selectedindex1 = 10 - datafigure[0] // option指定的选项在父组件中的位置
+   $('#select1').val(10 - selectedindex1)
+   // Remember that we use two bars, so we have '$select1' and '$select2'
+   ```
    
-   Here, the variable `status` indicates whether this question has been answered, in `Answer.vue`, we will use this sign to judge whether it's justifiable to move to next question.
+   If we want to get the values of the bars, we just load the value as done in 'select-option' component.
+   ```javascript
+   formjson = $('form').serializeArray()   // In 'QuestionList.vue'
+   ```
+   
+   
+   
