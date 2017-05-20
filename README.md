@@ -136,9 +136,9 @@ using vue 2.0 to implement the project
    formjson = $('form').serializeArray()   // In 'QuestionList.vue'
    ```
    
-5. The disposal of 'upload_image' question
+5. The disposal of `upload_image` question
 
-   We also create a seperate component named 'UploadImage.vue'. Here we use the api of wechat to take photos and get the path of the photos. See in `/components/Answers/Upload.vue`.
+   We also create a seperate component named `UploadImage.vue`. Here we use the api of wechat to take photos and get the path of the photos. See in `/components/Answers/Upload.vue`.
    ```javascript
    // First we should configure the api to get the authorization
    wx.config({...})
