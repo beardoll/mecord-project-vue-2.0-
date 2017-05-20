@@ -32,17 +32,18 @@ using vue 2.0 to implement the project
   npm install
   ```
 ### The data flow of answers
+1. Render the question
+   In `components/Answers/QuestionList.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render one question, which is decided by the conditional render syntax.
 
-1. common questions ('blank', 'select', 'multi_blank', 'multi_select')
+2. Two important functions in `method` module
 
-   In `components/Answers/QuestionList.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render on question, which is decided by the conditional render syntax.
+3. common questions ('blank', 'select', 'multi_blank', 'multi_select')
    All answers here will be saved in the `<form>` module, we can get the contents by applying:
    ```javascript
    formjson = $('form').serializeArray()
    ```
    The above code was written in function `dispatchAnswer(questionItem)` in `method` module.
-   After receving the content, you should transform its format to what we need. This operatoin can be found in the `switch` syntax in 'dispatchAnswer(questionItem)'. 
-
+   After receving the content, you should transform its format to what we need. This operatoin can be found in the `switch` syntax in `dispatchAnswer(questionItem)`. 
 
    | question style  |  answer format |
    | --------------- | ---------------|
@@ -50,3 +51,7 @@ using vue 2.0 to implement the project
    |     select      |      [0]       |
    |   multi_blank   |   ['3', '4']   | 
    |   multi_select  |   [1, 2, 3]    |
+   
+   After transformation, you should dispatch the answer the its parent component `Answer.vue`.
+   
+   Here, the variable `status` indicates whether this question has been answered, in `Answer.vue`, we will use this sign to judge whether it's justifiable to move to next question.
