@@ -106,7 +106,7 @@ using vue 2.0 to implement the project
    formjson = $('form').serializeArray()
    ```
    The above code was written in function `dispatchAnswer(questionItem)`
-   After receving the content, you should transform its format to what we need. This operation can be found in the `switch` syntax`. In the following we list the answer format.
+   After receving the content, you should transform its format to what we need. This operation can be found in the `switch` syntax`. In the following we list the answer format (together with special questions).
 
    | question style  |  answer format |
    | --------------- | ---------------|
@@ -114,10 +114,12 @@ using vue 2.0 to implement the project
    |     select      |     ['0']      |
    |   multi_blank   |   ['3', '4']   | 
    |   multi_select  | ['1', '2', '3']|
+   |   symptom_score |   ['3', '5']   |
+   |    upload_image | ['xxx'](path)  |
 
 4. The disposal of `symptom_score` question
 
-   We create a seperate model named `Score.vue` in the same directory, which accomplishes the task of: a. render the score bars. b. set the bars to the values indicated by `QuestionList.vue`.
+   We create a seperate component named `Score.vue` in the same directory, which accomplishes the task of: a. render the score bars. b. set the bars to the values indicated by `QuestionList.vue`.
    
    In fact, this kind of question is just the 'drop-down list', so we can set the value using `setSymptomScoreData(data)`:
    ```javascript
@@ -134,5 +136,21 @@ using vue 2.0 to implement the project
    formjson = $('form').serializeArray()   // In 'QuestionList.vue'
    ```
    
-   
+5. The disposal of 'upload_image' question
+
+   We also create a seperate component named 'UploadImage.vue'. Here we use the api of wechat to take photos and get the path of the photos. See in `/components/Answers/Upload.vue`.
+   ```javascript
+   // First we should configure the api to get the authorization
+   wx.config({...})
+   // Then we use the function 'wx.chooseImage' to get the image that users choose
+   success: function (res) {
+     $('#img').attr('src', res.localIds)
+     that.imgsrc = res.localIds
+   }
+   // note: the key words 'this' (originally point to Vue component) has been covered, so we should rename 'this' as 'that'
+   // Then we can get the path in 'QuestionList.vue' by using:
+   formjson = this.$refs.upimg.imgsrc     // In QuestionList.vue -> dispatchAnswer
+   // To set the default path of image, we can use setDefaultImgSrc(data) in 'QuestionList.vue'
+   this.$refs.upimg.setDefaultImgSrc(data)
+   ```
    
