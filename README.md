@@ -35,4 +35,17 @@ using vue 2.0 to implement the project
 
 1. common questions ('blank', 'select', 'multi-blank', 'multi-select')
 
-   wo shi shui
+   In `components/Answers/QuestionList.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render on question, which is decided by the conditional render syntax.
+   All answers here will be saved in the `<form>` module, we can get the contents by applying:
+   ```javascript
+   formjson = $('form').serializeArray()
+   ```
+   The above code was written in function `dispatchAnswer(questionItem)` in `method` module.
+   After receving the content, you should transform its format to what we need. This operatoin can be found in the `switch` syntax in 'dispatchAnswer(questionItem)'. 
+   | question      | format |
+   |---------------|--------|
+   | blank         | 0.698  |
+   | select        | 0.788  |
+   | multi-blank   | 0.657  |
+   | multi_select  | 0.000  |
+
