@@ -154,3 +154,7 @@ using vue 2.0 to implement the project
    this.$refs.upimg.setDefaultImgSrc(data)
    ```
    
+## The communications between components (especially when they are not parent-child relation)
+
+   Here we use a global eventHub to transport data between different components.
+   
