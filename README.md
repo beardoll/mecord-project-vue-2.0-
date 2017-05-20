@@ -33,11 +33,13 @@ using vue 2.0 to implement the project
   ```
 ### The data flow of answers
 1. Render the question
+
    In `components/Answers/QuestionList.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render one question, which is decided by the conditional render syntax.
 
 2. Two important functions in `method` module
 
 3. common questions ('blank', 'select', 'multi_blank', 'multi_select')
+
    All answers here will be saved in the `<form>` module, we can get the contents by applying:
    ```javascript
    formjson = $('form').serializeArray()
