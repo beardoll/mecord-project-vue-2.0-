@@ -115,7 +115,7 @@ using vue 2.0 to implement the project
    |   multi_blank   |   ['3', '4']   | 
    |   multi_select  | ['1', '2', '3']|
    |   symptom_score |   ['3', '5']   |
-   |    upload_image | ['xxx'](path)  |
+   |    upload_image | ['xxx'] (path) |
 
 4. The disposal of `symptom_score` question
 
