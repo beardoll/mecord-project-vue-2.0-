@@ -35,4 +35,4 @@ using vue 2.0 to implement the project
 
 1. common questions ('blank', 'select', 'multi-blank', 'multi-select')
 
-  we ware hahahaha
+   wo shi shui
