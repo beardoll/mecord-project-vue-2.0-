@@ -44,8 +44,9 @@ using vue 2.0 to implement the project
    After receving the content, you should transform its format to what we need. This operatoin can be found in the `switch` syntax in 'dispatchAnswer(questionItem)'. 
 
 
-| 表头1  | 表头2|
-| ---------- | -----------|
-| 表格单元   | 表格单元   |
-| 表格单元   | 表格单元   |
-
+| question style  |  answer format |
+| --------------- | ---------------|
+|      blank      |     ['16']     |
+|     select      |      [0]       |
+|   multi-blank   |   ['3', '4']   | 
+|   multi_select  |   [1, 2, 3]    |
