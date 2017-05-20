@@ -195,7 +195,7 @@ using vue 2.0 to implement the project
       })
       ```
 
-## How to load the data in the server 
+## How to use the data in the server 
 
 1. Save the data in the `root` component, see the method `loadClientDate()` (silly mistake in spelling...)
 
@@ -206,7 +206,7 @@ using vue 2.0 to implement the project
 
 2. Pre-compute the data before rendering
 
-   For example, in the page where we show the 'unfinished tasks', we should select the unfinished ones from the origin data. The operation is implemented in the `computed` part of `components/homepage/UnfinishedTasks.vue`. There are enough annotations about what we will do. The pre-computed data will be tranmitted to 'FirstPanel.vue' (child of 'UnfinishedTasks.vue') and 'TaskDetail.vue' (if the user requires to see the details of the task, it's no-parent). You can see the `<template>` module of `FirstPanel.vue` and `TaskDetail.vue` to get how we render the data. 
+   For example, in the page where we show the 'unfinished tasks', we should select the unfinished ones from the origin data. The operation is implemented in the `computed` part of `components/homepage/UnfinishedTasks.vue`. There are enough annotations about what we will do. The pre-computed data will be tranmitted to 'FirstPanel.vue' (child of 'UnfinishedTasks.vue') and 'TaskDetail.vue' (if the user requires to see the details of the task, it's no-parent). You can see the `<template>` module of `FirstPanel.vue` and `TaskDetail.vue` to get how we render the data. 
    
    And for `FinishedTask.vue`, it doesn't have child component, but it can redirect to 'TaskDetail.vue' to see some details of the finished tasks, so pre-compute operation is also required.
 
