@@ -33,7 +33,7 @@ using vue 2.0 to implement the project
   ```
 ### The data flow of answers
 
-1. common questions ('blank', 'select', 'multi-blank', 'multi-select')
+1. common questions ('blank', 'select', 'multi_blank', 'multi_select')
 
    In `components/Answers/QuestionList.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render on question, which is decided by the conditional render syntax.
    All answers here will be saved in the `<form>` module, we can get the contents by applying:
@@ -44,9 +44,9 @@ using vue 2.0 to implement the project
    After receving the content, you should transform its format to what we need. This operatoin can be found in the `switch` syntax in 'dispatchAnswer(questionItem)'. 
 
 
-| question style  |  answer format |
-| --------------- | ---------------|
-|      blank      |     ['16']     |
-|     select      |      [0]       |
-|   multi-blank   |   ['3', '4']   | 
-|   multi_select  |   [1, 2, 3]    |
+   | question style  |  answer format |
+   | --------------- | ---------------|
+   |      blank      |     ['16']     |
+   |     select      |      [0]       |
+   |   multi_blank   |   ['3', '4']   | 
+   |   multi_select  |   [1, 2, 3]    |
