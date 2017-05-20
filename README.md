@@ -154,7 +154,24 @@ using vue 2.0 to implement the project
    this.$refs.upimg.setDefaultImgSrc(data)
    ```
    
-## The communications between components (especially when they are not parent-child relation)
+## The communications between components
+1. The usage of `eventHub`
+   Here we use a global `eventHub` to transport data between different components. You can see the definition of the `eventHub` in `src/main.js`:
+   ```javascript
+   export var eventHub = new Vue()
+   ```
+   Then we can use this global `eventHub` to trigger a 'message sender':
+   ```javascript
+   eventHub.$emit(eventName, item)
+   ```
+   While triggering a 'message reciever', we can use:
+   ```javascript
+   eventHub.$on(eventName, (item) => {
+      // Here you can save the item in current vue component, for example
+      this.item = item
+   })
+   ```
 
-   Here we use a global eventHub to transport data between different components.
+2. Some tips in using `eventHub`
+   * When triggering an `eventHub`, you should make sure that the 'sender' and 'receiver' are all rendered.
    
