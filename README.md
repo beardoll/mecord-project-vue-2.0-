@@ -280,6 +280,7 @@ using vue 2.0 to implement the project
    
    It will cover the whole page, you can check the css style of the classes.
 
+4. We use troublesome ways to upload the image. First, we use the weixin api to get the local address of the image and store it into answers. Then we post the address to the server, and the server should get the image by visiting weixin cloud. The main difficulty in uploading image directly to the server is the gramma check by Eslint, and Ali cloud api doesn't conform to the standard. If we can disable the Eslint, maybe we can solve the problem.
 
 
    
