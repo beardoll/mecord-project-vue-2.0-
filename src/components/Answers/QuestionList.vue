@@ -99,8 +99,8 @@
     }
 </style>
 <script>
-  import Score from './Score'
-  import uploadimg from './UploadImg'
+  import Score from './score'
+  import uploadimg from './uploadimg'
   import { eventHub } from '../../main.js'
   export default{
     props: ['questionItem', 'curindex'],

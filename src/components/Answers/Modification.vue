@@ -36,7 +36,7 @@
     }
 </style>
 <script>
-  import questionlist from './QuestionList'
+  import questionlist from './questionList'
   import headtitle from '../public_component/head'
   import { eventHub } from '../../main.js'
   export default{

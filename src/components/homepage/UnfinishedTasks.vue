@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div id="unfinishedtasks">
     <table class="am-table tasktable" style="margin:0">
       <!-----------  未完成部分  ---------->
@@ -71,7 +71,7 @@
 
 </style>
 <script>
-    import firstpanel from './FirstPanel'
+    import firstpanel from './firstpanel'
     export default{
       data () {
         return {

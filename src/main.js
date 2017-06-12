@@ -80,11 +80,11 @@ new Vue({
       }, (response) => {
         console.log('cannot get signature')
         window.alert('cannot get signature')
-        process.nextTick(this.loadClientDate())
+        process.nextTick(this.loadClientData())
       })
-      process.nextTick(this.loadClientDate())    // 把用户数据加载
+      process.nextTick(this.loadClientData())    // 把用户数据加载
     },
-    loadClientDate () {
+    loadClientData () {
       // 加载用户数据
       this.$http.get('https://api.mecord.cn/api/MecordUsers/' + this.accesstoken.userId + '?filter=%7B%22include%22%3A%20%7B%22tasks%22%3A%20%7B%22submissions%22%3A%22questionSet%22%7D%7D%7D&access_token=' +
         // 这里include到"questionSet"那一层

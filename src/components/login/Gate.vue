@@ -45,7 +45,7 @@
         console.log('begin login!')
         var wxurl = window.location.href.split('#')[0]
         wxurl = encodeURIComponent(wxurl)
-        this.$root.login(wxurl, 'ez5vvico5xy020LMruUEZW7ed2xAW9u7RPap5YFINk3pNFlS6IDFYUf4VFErmjWI')
+        this.$root.login(wxurl, 'DFIMvqaUFODAfqbCt3kkja8DbA0HTnkdylRIhtCglNsC2coi9G2ThFMxuzwayr8x')
       })
     }
   }

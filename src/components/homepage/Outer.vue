@@ -64,8 +64,8 @@
     }
 </style>
 <script>
-    import unfinishedtasks from './UnfinishedTasks'
-    import finishedtasks from './FinishedTasks'
+    import unfinishedtasks from './unfinishedtasks'
+    import finishedtasks from './finishedtasks'
     export default{
       data () {
         return {

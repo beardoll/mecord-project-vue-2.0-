@@ -112,7 +112,7 @@
         return this.taskitem.title
       },
       creator: function () {
-        return 'sb'
+        return 'ruanliang'
         // return this.taskitem.creator.nickname
       },
       timediff: function () {

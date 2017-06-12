@@ -2,7 +2,7 @@
   <div id="outline">
     <div id="content">
       <homepage v-if="index === 0"></homepage>
-      <mine v-if="index === 1"></mine>
+      <interfere v-if="index === 1"></interfere>
     </div>
     <div class="am-topbar am-topbar-fixed-bottom" id="footer" style="background:snow">
       <div class="am-u-sm-6" @click.stop="changeIcon(0)">
@@ -45,8 +45,8 @@
     }
 </style>
 <script>
-    import homepage from './homepage/Outer'
-    import mine from './mine/Mine'
+    import homepage from './homepage/outer'
+    import interfere from './individual/interfere'
     export default{
       data () {
         return {
@@ -55,7 +55,7 @@
       },
       components: {
         homepage,
-        mine
+        interfere
       },
       methods: {
         changeIcon (tips) {
