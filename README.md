@@ -3,10 +3,10 @@ using vue 2.0 to implement the project
 
 ## The structure of the project
    All the components except the root component are written in `src/components`.
-   * `Answers` -- Components about showing the questions, storing the answers and uploading the answers to the server, etc.
+   * `answers` -- Components about showing the questions, storing the answers and uploading the answers to the server, etc.
    * `homepage` -- Components about showing the details of tasks, adding new tasks, setting some status of tasks, etc.
    * `login` -- Components about the gate of the project, here is the first page you can see when you enter the project.
-   * `mine` -- Components about showing the private information, users can modify their information.
+   * `individual` -- Components about showing the private information, users can modify their information.
    * `public_component` -- Components that are used frequently.
 
 ## How to debug in PC
@@ -23,11 +23,11 @@ using vue 2.0 to implement the project
    this.accesstoken.id = data.id
    ```
   
-3. In `components/login/Gate.vue`, focus on script codes, then uncomment all the codes in `mounted` model. Also you should comment the `created` model together with the sentence:
+3. In `components/login/gate.vue`, focus on script codes, then uncomment all the codes in `mounted` model. Also you should comment the `created` model together with the sentence:
    ```javascript
    var qs = require('querystring')
    ```
-4. When debugging in PC, you should get the accesstoken at the backend and write the info into the `mounted` model of `components/login/Gate.vue`:
+4. When debugging in PC, you should get the accesstoken at the backend and write the info into the `mounted` model of `components/login/gate.vue`:
    ```javascript
    this.$root.login(wxurl, 'ez5vvico5xy020LMruUEZW7ed2xAW9u7RPap5YFINk3pNFlS6IDFYUf4VFErmjWI')  
    ```
@@ -48,7 +48,7 @@ using vue 2.0 to implement the project
 ## The data flow of answers
 1. Render the question
 
-   In `components/Answers/QuestionList.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render one question, which is decided by the conditional render syntax.
+   In `components/Answers/questionlist.vue`, you can see the disposals of questions and the corresponding answers. At the `<template>` module, you can see how we render the questions in vue component. Remember that in each component, we only render one question, which is decided by the conditional render syntax.
 
 2. Two important functions in `method` module
  
@@ -93,7 +93,7 @@ using vue 2.0 to implement the project
    //    2. status: the sign to indicate whether the question has been finished
    ```
    
-   To clearly show how it works, let's focus on the parent component `/components/Answers/Answer.vue`. Here we can find two methods, named `goToNextOne(index)` and `backToPastOne(index)`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)` and `dispatchAnswer(questionItem)`. We just introduce `goToNextOne(index)`.
+   To clearly show how it works, let's focus on the parent component `/components/answers/answer.vue`. Here we can find two methods, named `goToNextOne(index)` and `backToPastOne(index)`, respectively. Both of the methods apply `setDefaultValue(questiontype, data)` and `dispatchAnswer(questionItem)`. We just introduce `goToNextOne(index)`.
    
    ```javascript
    gotoNextOne(index)
@@ -120,7 +120,7 @@ using vue 2.0 to implement the project
    formjson = $('form').serializeArray()
    ```
    The above code was written in function `dispatchAnswer(questionItem)`
-   After receving the content, you should transform its format to what we need. This operation can be found in the `switch` syntax`. In the following we list the answer format (together with special questions).
+   After receving the content, you should transform its format to what we need. This operation can be found in the `switch` syntax. In the following we list the answer format (together with special questions).
 
    | question style  |  answer format |
    | --------------- | ---------------|
@@ -133,7 +133,7 @@ using vue 2.0 to implement the project
 
 4. The disposal of `symptom_score` question
 
-   We create a seperate component named `Score.vue` in the same directory, which accomplishes the task of: a. render the score bars. b. set the bars to the values indicated by `QuestionList.vue`.
+   We create a seperate component named `Score.vue` in the same directory, which accomplishes the task of: a. render the score bars. b. set the bars to the values indicated by `questionlist.vue`.
    
    In fact, this kind of question is just the 'drop-down list', so we can set the value using `setSymptomScoreData(data)`:
    ```javascript
@@ -147,12 +147,12 @@ using vue 2.0 to implement the project
    
    If we want to get the values of the bars, we just load the value as done in 'select-option' component.
    ```javascript
-   formjson = $('form').serializeArray()   // In 'QuestionList.vue'
+   formjson = $('form').serializeArray()   // In 'questionlist.vue'
    ```
    
 5. The disposal of `upload_image` question
 
-   We also create a seperate component named `UploadImage.vue`. Here we use the api of wechat to take photos and get the path of the photos.
+   We also create a seperate component named `uploadimage.vue`. Here we use the api of wechat to take photos and get the path of the photos.
    ```javascript
    // First we should configure the api to get the authorization
    wx.config({...})
@@ -163,7 +163,7 @@ using vue 2.0 to implement the project
    }
    // note: the key words 'this' (originally point to Vue component) has been covered, so we should rename 'this' as 'that'
    // Then we can get the path in 'QuestionList.vue' by using:
-   formjson = this.$refs.upimg.imgsrc     // In QuestionList.vue -> dispatchAnswer
+   formjson = this.$refs.upimg.imgsrc     // In questionlist.vue -> dispatchAnswer
    // To set the default path of image, we can use setDefaultImgSrc(data) in 'QuestionList.vue'
    this.$refs.upimg.setDefaultImgSrc(data)
    ```
@@ -211,7 +211,7 @@ using vue 2.0 to implement the project
 
 ## How to use the data in the server 
 
-1. Save the data in the `root` component, see the method `loadClientDate()` (silly mistake in spelling...)
+1. Save the data in the `root` component, see the method `loadClientData()`
 
    ```javascript
    this.userData = response.data  // 存放用户数据，子模块使用   
@@ -220,13 +220,13 @@ using vue 2.0 to implement the project
 
 2. Pre-compute the data before rendering
 
-   For example, in the page where we show the 'unfinished tasks', we should select the unfinished ones from the origin data. The operation is implemented in the `computed` part of `components/homepage/UnfinishedTasks.vue`. There are enough annotations about what we will do. The pre-computed data will be tranmitted to 'FirstPanel.vue' (child of 'UnfinishedTasks.vue') and 'TaskDetail.vue' (if the user requires to see the details of the task, it's no-parent). You can see the `<template>` module of `FirstPanel.vue` and `TaskDetail.vue` to get how we render the data. 
+   For example, in the page where we show the 'unfinished tasks', we should select the unfinished ones from the origin data. The operation is implemented in the `computed` part of `components/homepage/UnfinishedTasks.vue`. There are enough annotations about what we will do. The pre-computed data will be tranmitted to 'firstpanel.vue' (child of 'unfinishedtasks.vue') and 'taskdetail.vue' (if the user requires to see the details of the task, it's no-parent). You can see the `<template>` module of `firstpanel.vue` and `taskdetail.vue` to get how we render the data. 
    
-   And for `FinishedTask.vue`, it doesn't have child component, but it can redirect to 'TaskDetail.vue' to see some details of the finished tasks, so pre-compute operation is also required.
+   And for `finishedtask.vue`, it doesn't have child component, but it can redirect to 'taskdetail.vue' to see some details of the finished tasks, so pre-compute operation is also required.
    
 ## How to upload the answers to the server
 
-   See the function `submit()` in `components/Answers/Preview.vue`
+   See the function `submit()` in `components/answers/preview.vue`
 
 1. Pre-compute the answer to the format designated by the server. If the answers include attachments, then we should do some trival things. First, attachments are bound to 'answer', so we should create an empty answer and store it in 'answers'. Then we should save the 'questionid' and the attachment information of the questions requiring attachments:
 
@@ -267,7 +267,7 @@ using vue 2.0 to implement the project
    }
    ```
 
-3. In `Preview.vue`, we create a mask to inform the user that his answer is being uploaded. The design of the mask can be found in `<template>`:
+3. In `preview.vue`, we create a mask to inform the user that his answer is being uploaded. The design of the mask can be found in `<template>`:
 
    ```html
     <div class="mask" v-if="showmask === true">
@@ -280,8 +280,10 @@ using vue 2.0 to implement the project
    
    It will cover the whole page, you can check the css style of the classes.
 
-4. We use troublesome ways to upload the image. First, we use the weixin api to get the local address of the image and store it into answers. Then we post the address to the server, and the server should get the image by visiting weixin cloud. The main difficulty in uploading image directly to the server is the gramma check by Eslint, and Ali cloud api doesn't conform to the standard. If we can disable the Eslint, maybe we can solve the problem.
+## Some exsiting problem
+1. We use troublesome ways to upload the image. First, we use the weixin api to get the local address of the image and store it into answers. Then we post the address to the server, and the server should get the image by visiting weixin cloud. The main difficulty in uploading image directly to the server is the gramma check by Eslint, and Ali cloud api doesn't conform to the standard. If we can disable the Eslint, maybe we can solve the problem. 
 
-
+   Due to this problem, the image cannot be downloaded when the user review his/her historical questionset.   
    
+2. The 'creator' in homepage cannot been obtained from the server now, and I just set this property as 'ruanliang' in `/homepage/firstpanel` -> computed -> creator. You can modify the assignment if it's OK to get the value from the server.   
    
