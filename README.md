@@ -280,10 +280,10 @@ using vue 2.0 to implement the project
    
    It will cover the whole page, you can check the css style of the classes.
 
-## Some exsiting problem
+## Some exsiting problems
 1. We use troublesome ways to upload the image. First, we use the weixin api to get the local address of the image and store it into answers. Then we post the address to the server, and the server should get the image by visiting weixin cloud. The main difficulty in uploading image directly to the server is the gramma check by Eslint, and Ali cloud api doesn't conform to the standard. If we can disable the Eslint, maybe we can solve the problem. 
 
    Due to this problem, the image cannot be downloaded when the user review his/her historical questionset.   
    
-2. The 'creator' in homepage cannot been obtained from the server now, and I just set this property as 'ruanliang' in `/homepage/firstpanel` -> computed -> creator. You can modify the assignment if it's OK to get the value from the server.   
+2. The 'creator' in homepage cannot been obtained from the server now, and I just set this property as 'ruanliang' in `/homepage/firstpanel` -> `computed` -> `creator`. You can modify the assignment if it's OK to get the value from the server.   
    
